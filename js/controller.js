@@ -17,7 +17,14 @@ var workOrders = [
     new WorkOrder("b", 43, 11.12, 30)
 ];
 
-angular.module('app', ['ui.bootstrap']).controller('appController', function ($scope) {
+
+var app = angular.module('app', ['ui.bootstrap']);
+
+app.controller('appController', function ($scope, $window) {
+
+    angular.element($window).bind('orientationchange', function () {
+        console.log($window.orientation);
+    });
 
     var mapContainer = document.getElementById('map');
     $scope.map = new google.maps.Map(
@@ -30,7 +37,8 @@ angular.module('app', ['ui.bootstrap']).controller('appController', function ($s
             zoomControlOptions: {
                 position: google.maps.ControlPosition.TOP_LEFT
             } 
-        });
+        }
+    );
     $scope.markers = [];
     var infoWindow = new google.maps.InfoWindow();
 
@@ -67,6 +75,8 @@ angular.module('app', ['ui.bootstrap']).controller('appController', function ($s
         google.maps.event.trigger($scope.map, 'resize'); 
     });
 
+    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('fullScreenMapBtn'));
+
     function centerMap() {
         $scope.map.setCenter(new google.maps.LatLng(-34, 151));
     }
@@ -76,7 +86,5 @@ angular.module('app', ['ui.bootstrap']).controller('appController', function ($s
         google.maps.event.trigger($scope.map, "resize");
         centerMap();
     };
-
-    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('fullScreenMapBtn'));
 
 });
