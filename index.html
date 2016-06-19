@@ -18,13 +18,26 @@
                 <span class="glyphicon" ng-class="fullScreenMap ? 'glyphicon-resize-small' : 'glyphicon-fullscreen'" aria-hidden="true"></span>
             </button>
             <div id="panel">
-                               
+                <a href="geo:124.028582,-29.201930" target="_blank">Click here for map</a>
+                <a href="tel:+6494461709">61709</a>
                 
                 <div ng-repeat="marker in markers | orderBy : 'title'">
                     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
                 </div>
             </div>
         </div>
+
+        <div ng-controller="orientationController" style="display: none;">
+            <script type="text/ng-template" id="orientationModal.html">
+                <div class="modal-body">
+                    We recommend to use your device in portrait mode for a better user experience.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="dismiss()">OK</button>
+                </div>
+            </script>
+        </div>
+
         <script src="https://maps.googleapis.com/maps/api/js?language=en"></script>
         <script src="js/controller.js"></script>
     </body>

@@ -20,11 +20,33 @@ var workOrders = [
 
 var app = angular.module('app', ['ui.bootstrap']);
 
-app.controller('appController', function ($scope, $window) {
+app.controller('modalInstanceController', function ($scope, $uibModalInstance) {
+    $scope.dismiss = function() {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+app.controller('orientationController', function ($scope, $window, $uibModal) {
+    
+    checkDeviceOrientation();
 
     angular.element($window).bind('orientationchange', function () {
-        alert($window.orientation);
+        checkDeviceOrientation();
     });
+
+    function checkDeviceOrientation() {
+        if($window.orientation != 0) {
+            $scope.modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'orientationModal.html',
+                controller: 'modalInstanceController'
+            });
+        }
+    }
+
+});
+
+app.controller('appController', function ($scope) {
 
     var mapContainer = document.getElementById('map');
     $scope.map = new google.maps.Map(
