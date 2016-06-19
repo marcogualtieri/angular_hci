@@ -23,10 +23,13 @@ var app = angular.module('app', ['ui.bootstrap']);
 app.controller('modalInstanceController', function ($scope, $uibModalInstance) {
     $scope.dismiss = function() {
         $uibModalInstance.dismiss('cancel');
+        $scope.orientationModalOpened = false;
     };
 });
 
 app.controller('orientationController', function ($scope, $window, $uibModal) {
+
+    $scope.orientationModalOpened = false;
     
     checkDeviceOrientation();
 
@@ -35,12 +38,14 @@ app.controller('orientationController', function ($scope, $window, $uibModal) {
     });
 
     function checkDeviceOrientation() {
-        if($window.orientation != 0) {
-            $scope.modalInstance = $uibModal.open({
+        if($window.orientation && $window.orientation != 0 && !$scope.orientationModalOpened) {
+            $scope.orientationModal = $uibModal.open({
                 animation: true,
+                size: 'sm',
                 templateUrl: 'orientationModal.html',
                 controller: 'modalInstanceController'
             });
+            $scope.orientationModalOpened = true;
         }
     }
 
@@ -97,7 +102,7 @@ app.controller('appController', function ($scope) {
         google.maps.event.trigger($scope.map, 'resize'); 
     });
 
-    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('fullScreenMapBtn'));
+    $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('fullScreenMapBtn'));
 
     function centerMap() {
         $scope.map.setCenter(new google.maps.LatLng(-34, 151));
