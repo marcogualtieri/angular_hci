@@ -2,7 +2,7 @@
 <html ng-app="app">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>HCI</title>
         <script src="js/angular.min.js"></script>
         <script src="js/angular-animate.min.js"></script>
@@ -13,8 +13,13 @@
     </head>
     <body>
         <div ng-controller="appController" style="height:100%">
-            <div id="map"></div>
+            <div id="map" ng-class="{'fullScreen': fullScreenMap}"></div>
+            <button type="button" id="fullScreenMapBtn" class="btn btn-default" ng-click="toggleFullScreenMap()">
+                <span class="glyphicon" ng-class="fullScreenMap ? 'glyphicon-resize-small' : 'glyphicon-fullscreen'" aria-hidden="true"></span>
+            </button>
             <div id="panel">
+                               
+                
                 <div ng-repeat="marker in markers | orderBy : 'title'">
                     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
                 </div>

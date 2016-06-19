@@ -9,6 +9,15 @@ body {
 #map {
     height: 60%;
 }
+#map.fullScreen {
+    height: 100%;
+}
+#fullScreenMapBtn {
+    top: 10px !important;
+    right: 8px !important;
+    font-size: 16px;
+    padding: 6px 8px 3px 8px;
+}
 #panel {
     background: white;
     height: 40%;

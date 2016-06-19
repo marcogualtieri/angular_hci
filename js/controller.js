@@ -19,20 +19,23 @@ var workOrders = [
 
 angular.module('app', ['ui.bootstrap']).controller('appController', function ($scope) {
 
+    var mapContainer = document.getElementById('map');
     $scope.map = new google.maps.Map(
-        document.getElementById('map'), 
+        mapContainer, 
         {
             zoom: 4,
             center: new google.maps.LatLng(40.0000, -98.0000),
             disableDefaultUI: true,
             zoomControl: true,
             zoomControlOptions: {
-                position: google.maps.ControlPosition.TOP_RIGHT
+                position: google.maps.ControlPosition.TOP_LEFT
             } 
         });
     $scope.markers = [];
     var infoWindow = new google.maps.InfoWindow();
-     
+
+    
+
     var createMarker = function (workOrder) {
         var marker = new google.maps.Marker({
             map: $scope.map,
@@ -56,5 +59,24 @@ angular.module('app', ['ui.bootstrap']).controller('appController', function ($s
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
+
+    // full screen map
+    $scope.fullScreenMap = false;
+
+    google.maps.event.addListener($scope.map, 'idle', function(){
+        google.maps.event.trigger($scope.map, 'resize'); 
+    });
+
+    function centerMap() {
+        $scope.map.setCenter(new google.maps.LatLng(-34, 151));
+    }
+    
+    $scope.toggleFullScreenMap = function() {
+        $scope.fullScreenMap = !$scope.fullScreenMap;
+        google.maps.event.trigger($scope.map, "resize");
+        centerMap();
+    };
+
+    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('fullScreenMapBtn'));
 
 });
