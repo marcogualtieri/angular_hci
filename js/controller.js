@@ -20,16 +20,16 @@ var workOrders = [
 
 var app = angular.module('app', ['ui.bootstrap']);
 
-app.controller('modalInstanceController', function ($scope, $uibModalInstance) {
+app.controller('modalInstanceController', function ($scope, $rootScope, $uibModalInstance) {
     $scope.dismiss = function() {
         $uibModalInstance.dismiss('cancel');
-        $scope.orientationModalOpened = false;
+        $rootScope.orientationModalOpened = false;
     };
 });
 
-app.controller('orientationController', function ($scope, $window, $uibModal) {
+app.controller('orientationController', function ($scope, $rootScope, $window, $uibModal) {
 
-    $scope.orientationModalOpened = false;
+    $rootScope.orientationModalOpened = false;
     
     checkDeviceOrientation();
 
@@ -45,7 +45,7 @@ app.controller('orientationController', function ($scope, $window, $uibModal) {
                 templateUrl: 'orientationModal.html',
                 controller: 'modalInstanceController'
             });
-            $scope.orientationModalOpened = true;
+            $rootScope.orientationModalOpened = true;
         }
     }
 
@@ -69,8 +69,6 @@ app.controller('appController', function ($scope) {
     $scope.markers = [];
     var infoWindow = new google.maps.InfoWindow();
 
-    
-
     var createMarker = function (workOrder) {
         var marker = new google.maps.Marker({
             map: $scope.map,
@@ -90,12 +88,15 @@ app.controller('appController', function ($scope) {
         createMarker(workOrders[i]);
     }
 
+    centerMap();
+
     $scope.openInfoWindow = function(e, selectedMarker){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
 
-    // full screen map
+    // full screen and center map
+
     $scope.fullScreenMap = false;
 
     google.maps.event.addListener($scope.map, 'idle', function(){
@@ -103,10 +104,19 @@ app.controller('appController', function ($scope) {
     });
 
     $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('fullScreenMapBtn'));
+    $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('centerMapBtn'));
 
     function centerMap() {
-        $scope.map.setCenter(new google.maps.LatLng(-34, 151));
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < $scope.markers.length; i++) {
+            bounds.extend($scope.markers[i].getPosition());
+        }   
+        $scope.map.fitBounds(bounds);
     }
+
+    $scope.callCenterMap = function() {
+        centerMap();
+    };
     
     $scope.toggleFullScreenMap = function() {
         $scope.fullScreenMap = !$scope.fullScreenMap;

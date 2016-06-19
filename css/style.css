@@ -12,11 +12,16 @@ body {
 #map.fullScreen {
     height: 100%;
 }
-#fullScreenMapBtn {
-    top: 74px !important;
+.zoomMapBtn {
     left: 9px !important;
     font-size: 12px;
     padding: 6px 8px 3px 8px;
+}
+#fullScreenMapBtn {
+    top: 74px !important;
+}
+#centerMapBtn {
+    top: 110px !important;
 }
 #panel {
     background: white;
