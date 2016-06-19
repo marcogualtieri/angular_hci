@@ -23,7 +23,7 @@ var app = angular.module('app', ['ui.bootstrap']);
 app.controller('appController', function ($scope, $window) {
 
     angular.element($window).bind('orientationchange', function () {
-        console.log($window.orientation);
+        alert($window.orientation);
     });
 
     var mapContainer = document.getElementById('map');
