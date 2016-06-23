@@ -76,7 +76,7 @@ app.controller('appController', function ($scope) {
             title: workOrder.name
         });
         marker.content = '<div class="infoWindowContent">' + workOrder.service + '</div>';
-        google.maps.event.addListener(marker, 'click', function(){
+        google.maps.event.addListener(marker, 'click', function (e) {
             infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
             infoWindow.open($scope.map, marker);
             $scope.map.setCenter(marker.getPosition());
@@ -90,10 +90,14 @@ app.controller('appController', function ($scope) {
 
     centerMap();
 
-    $scope.openInfoWindow = function(e, selectedMarker){
+    $scope.openInfoWindow = function (e, selectedMarker) {
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
+
+    google.maps.event.addListener($scope.map, 'click', function (e) {
+        infoWindow.close();
+    });
 
     // full screen and center map
 
