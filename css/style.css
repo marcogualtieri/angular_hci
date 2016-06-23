@@ -27,9 +27,3 @@ body {
     background: white;
     height: 40%;
 }
-
-.infoWindowContent {
-    font-size:  14px !important;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-}

@@ -4,8 +4,10 @@ var WorkOrderStatuses = {
     FAILED: 2
 };
 
-function WorkOrder(name, lat, lng, service) {
+function WorkOrder(sequence, name, description, lat, lng, service) {
+    this.sequence = sequence;
     this.name = name;
+    this.description = description;
     this.service = service;
     this.lat = lat;
     this.lng = lng;
@@ -13,10 +15,15 @@ function WorkOrder(name, lat, lng, service) {
 }
 
 var workOrders = [
-    new WorkOrder("a", 43, 11.1, 30),
-    new WorkOrder("b", 43, 11.12, 30)
+    new WorkOrder(1, "Aviva Stadium", "", 53.335232, -6.228167, 30),
+    new WorkOrder(2, "St Patrick", "", 53.339590, -6.272441, 30),
+    new WorkOrder(3, "Trinity College", "", 53.344587, -6.259389, 30),
+    new WorkOrder(4, "Guinnes Storehouse", "", 53.341874, -6.286725, 30),
+    new WorkOrder(5, "Jameson Distillery", "", 53.348463, -6.277975, 30),
+    new WorkOrder(6, "Croke Park", "", 53.360963, -6.252282, 30),
+    new WorkOrder(7, "National Post Office", "", 53.349450, -6.260210, 30),
+    new WorkOrder(8, "Dublin Port", "", 53.349509, -6.207904, 30)
 ];
-
 
 var app = angular.module('app', ['ui.bootstrap']);
 
@@ -72,12 +79,18 @@ app.controller('appController', function ($scope) {
     var createMarker = function (workOrder) {
         var marker = new google.maps.Marker({
             map: $scope.map,
+            icon: {
+                url: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+                origin: new google.maps.Point(0, -5)
+            },
             position: new google.maps.LatLng(workOrder.lat, workOrder.lng),
-            title: workOrder.name
+            title: workOrder.name,
+            label: workOrder.sequence.toString()
         });
-        marker.content = '<div class="infoWindowContent">' + workOrder.service + '</div>';
+        marker.content = '<a href="geo:' + workOrder.lat + ',' + workOrder.lng + '" target="_blank">Direction</a>' 
+            + ' <a href="tel:+12345678">Phone</a>';
         google.maps.event.addListener(marker, 'click', function (e) {
-            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+            infoWindow.setContent(marker.title + '<br>' + marker.content);
             infoWindow.open($scope.map, marker);
             $scope.map.setCenter(marker.getPosition());
         });
@@ -126,6 +139,32 @@ app.controller('appController', function ($scope) {
         $scope.fullScreenMap = !$scope.fullScreenMap;
         google.maps.event.trigger($scope.map, "resize");
         centerMap();
+    };
+
+    // additional layers
+
+    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('trafficLayerMapBtn'));
+    $scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('bikeLayerMapBtn'));
+
+    var trafficLayer = new google.maps.TrafficLayer();
+    var bikeLayer = new google.maps.BicyclingLayer();
+
+    $scope.toggleTrafficLayerMap = function() {
+        if (trafficLayer.getMap()) {
+            trafficLayer.setMap(null);
+        } 
+        else {
+            trafficLayer.setMap($scope.map);
+        }
+    };
+
+    $scope.toggleBikeLayerMap = function() {
+        if (bikeLayer.getMap()) {
+            bikeLayer.setMap(null);
+        } 
+        else {
+            bikeLayer.setMap($scope.map);
+        }
     };
 
 });

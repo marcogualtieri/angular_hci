@@ -18,14 +18,17 @@
                     <span class="glyphicon" ng-class="fullScreenMap ? 'glyphicon-resize-small' : 'glyphicon-fullscreen'" aria-hidden="true"></span>
                 </button>
                 <button type="button" id="centerMapBtn" class="btn btn-default zoomMapBtn" ng-click="callCenterMap()">
-                    <span class="glyphicon glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                </button>
+                <button type="button" id="trafficLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleTrafficLayerMap()">
+                    <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                </button>
+                <button type="button" id="bikeLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleBikeLayerMap()">
+                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                 </button>
             </div>
             <div id="map" ng-class="{'fullScreen': fullScreenMap}"></div>
             <div id="panel">
-                <a href="geo:124.028582,-29.201930" target="_blank">Click here for map</a>
-                <a href="tel:+6494461709">61709</a>
-                
                 <div ng-repeat="marker in markers | orderBy : 'title'">
                     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
                 </div>
