@@ -168,4 +168,9 @@ app.controller('appController', function ($scope) {
         }
     };
 
+    // change status
+    $scope.testSwift = function (sequence) {
+        alert(sequence);
+    };
+
 });
