@@ -85,7 +85,8 @@ app.controller('appController', function ($scope) {
             },
             position: new google.maps.LatLng(workOrder.lat, workOrder.lng),
             title: workOrder.name,
-            label: workOrder.sequence.toString()
+            label: workOrder.sequence.toString(),
+            sequence: workOrder.sequence
         });
         marker.content = '<a href="geo:' + workOrder.lat + ',' + workOrder.lng + '" target="_blank">Direction</a>' 
             + ' <a href="tel:+12345678">Phone</a>';

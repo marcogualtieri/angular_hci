@@ -29,9 +29,15 @@
             </div>
             <div id="map" ng-class="{'fullScreen': fullScreenMap}"></div>
             <div id="panel">
-                <div ng-repeat="marker in markers | orderBy : 'title'">
-                    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
-                </div>
+                <div style="height:40px;background:lightblue;text-align:center;">Swipe right to close</div>
+                <ul class="nav nav-pills nav-stacked" style="height:100%; padding-bottom:50px;overflow-y:auto;">
+                    <li role="presentation" class="no/active" ng-repeat="marker in markers | orderBy : 'sequence'">
+                        <a href="#" ng-click="openInfoWindow($event, marker)">
+                            <span class="badge alert-info">{{marker.sequence}}</span>
+                            {{marker.title}}
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
 
