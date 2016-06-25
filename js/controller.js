@@ -25,7 +25,7 @@ var workOrders = [
     new WorkOrder(8, "Dublin Port", "", 53.349509, -6.207904, 30)
 ];
 
-var app = angular.module('app', ['ui.bootstrap']);
+var app = angular.module('app', ['ui.bootstrap', 'ngTouch']);
 
 app.controller('modalInstanceController', function ($scope, $rootScope, $uibModalInstance) {
     $scope.dismiss = function() {
