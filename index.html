@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>HCI</title>
+        <script src="js/mock_data_provider.js"></script>
         <script src="js/angular.min.js"></script>
         <script src="js/angular-animate.min.js"></script>
         <script src="js/angular-touch.min.js"></script>
@@ -12,6 +13,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+
         <div ng-controller="appController" style="height:100%">
             <div style="display: none;">
                 <button type="button" id="fullScreenMapBtn" class="btn btn-default zoomMapBtn" ng-click="toggleFullScreenMap()">
@@ -27,18 +29,20 @@
                     <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                 </button>
             </div>
+
             <div id="map" ng-class="{'fullScreen': fullScreenMap}"></div>
+
             <div id="panel">
                 <div style="height:40px;background:lightblue;text-align:center;">Swipe to close</div>
-                <ul class="nav nav-pills nav-stacked" style="height:100%; padding-bottom:50px;overflow-y:auto;">
-                    <li role="presentation" class="no/active" ng-repeat="marker in markers | orderBy : 'sequence'">
-                        <a href="#" ng-click="openInfoWindow($event, marker)" ng-swipe-right="testSwift(marker.sequence)" ng-swipe-left="testSwift(marker.sequence)">
-                            <span class="badge alert-info">{{marker.sequence}}</span>
-                            {{marker.title}}
-                        </a>
-                    </li>
-                </ul>
+                <div id="workOrdersContainer" class="list-group">
+                    <a href="#" class="list-group-item" ng-repeat="workOrder in workOrders | orderBy : 'index'" ng-click="openInfoWindow($event, workOrder)" ng-swipe-right="testSwift(workOrder.index)" ng-swipe-left="testSwift(workOrder.index)">
+                    <!-- ng-class="{active: marker.sequence == selectedIndex}" -->
+                        {{workOrder.index}}
+                        {{workOrder.name}}
+                    </a>
+                </div>
             </div>
+
         </div>
 
         <div ng-controller="orientationController" style="display: none;">
@@ -53,6 +57,6 @@
         </div>
 
         <script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyAxTw0x6AZatigoYXbuwD_d3R9D88vTaFQ"></script>
-        <script src="js/controller.js"></script>
+        <script src="js/controllers.js"></script>
     </body>
 </html>
