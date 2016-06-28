@@ -31,7 +31,7 @@ DataProvider = (function() {
         new WorkOrder(1, 53.335232, -6.228167, "Aviva Stadium", "Delivery", 10),
         new WorkOrder(2, 53.339590, -6.272441, "St Patrick", "Maintenance", 60),
         new WorkOrder(3, 53.344587, -6.259389, "Trinity College", "Delivery", 40),
-        new WorkOrder(4, 53.341874, -6.286725, "Guinnes Storehouse", "Repair", 50),
+        new WorkOrder(4, 53.341874, -6.286725, "Guinness Storehouse", "Repair", 50),
         new WorkOrder(5, 53.348463, -6.277975, "Jameson Distillery", "Delivery", 10),
         new WorkOrder(6, 53.360963, -6.252282, "Croke Park", "Pickup", 20),
         new WorkOrder(7, 53.349450, -6.260210, "National Post Office", "Pickup", 25),

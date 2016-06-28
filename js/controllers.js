@@ -55,9 +55,9 @@ app.controller('appController', function ($scope) {
 
     var setEventForMarkerClick = function (marker) {
         google.maps.event.addListener(marker, 'click', function (evt) {
-            infoWindow.setContent(marker.content);
-            infoWindow.open($scope.map, marker);
-            $scope.map.setCenter(marker.getPosition());
+            $scope.$apply(function() {
+                $scope.selectWorkOrder(evt, marker.index);
+            });
         });
     };
 
@@ -88,11 +88,18 @@ app.controller('appController', function ($scope) {
     
     generateMarkersForWorkOrders($scope.workOrders);
 
-    console.log($scope.workOrders);
-
     centerMap();
 
-    $scope.selectedIndex = null;
+    // select work orders
+
+    $scope.selectWorkOrder = function (evt, index) {
+        $scope.selectedIndex = index;
+        var workOrder = $scope.workOrders.filter(function (w) { 
+            return w.index == index })[0];
+        infoWindow.setContent(workOrder.marker.content);
+        infoWindow.open($scope.map, workOrder.marker);
+        $scope.map.setCenter(workOrder.marker.getPosition());
+    };
 
     // questo deve ricevere il workOrder, che deve avere come property il marker
     // così posso accedere al sequence id e aggiornare l'active li
