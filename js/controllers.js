@@ -85,6 +85,8 @@ app.controller('appController', function ($scope) {
     // get work orders
 
     $scope.workOrders = DataProvider.WorkOrders;
+
+    $scope.workOrderStatuses = DataProvider.WorkOrderStatuses;
     
     generateMarkersForWorkOrders($scope.workOrders);
 
@@ -101,8 +103,6 @@ app.controller('appController', function ($scope) {
         $scope.map.setCenter(workOrder.marker.getPosition());
     };
 
-    // questo deve ricevere il workOrder, che deve avere come property il marker
-    // così posso accedere al sequence id e aggiornare l'active li
     $scope.openInfoWindow = function (evt, selectedWorkOrder) {
         evt.preventDefault();
         google.maps.event.trigger(selectedWorkOrder.marker, 'click');
@@ -169,15 +169,16 @@ app.controller('appController', function ($scope) {
 
     // change status
 
-    $scope.setWorkOrderDone = function (index) {
-        if($scope.selectedIndex == index) { // to prevent accidental swipe on not selected rows
-            alert("WorkOrder " + index + " set as Done!");
-        }
-    };
-
-    $scope.setWorkOrderFail = function (index) {
-        if($scope.selectedIndex == index) { // to prevent accidental swipe on not selected rows
-            alert("WorkOrder " + index + " set as Fail!");
+    $scope.setWorkOrderStatus = function (workOrder, statusLabel) {
+        if($scope.selectedIndex == workOrder.index) { // to prevent accidental swipe on not selected rows
+            if (workOrder.status == $scope.workOrderStatuses.TODO) {
+                if(statusLabel == 'done') {
+                    workOrder.setDone();
+                }
+                else if(statusLabel == 'fail') {
+                    workOrder.setFail();
+                }
+            }
         }
     };
 
