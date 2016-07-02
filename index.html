@@ -35,9 +35,13 @@
             <div id="panel">
                 <div style="height:40px;background:lightblue;text-align:center;">Swipe to close</div>
                 <div id="workOrdersContainer" class="list-group">
-                    <a href="#" class="list-group-item" ng-repeat="workOrder in workOrders | orderBy : 'index'" ng-click="selectWorkOrder($event, workOrder.index)" ng-swipe-right="testSwift(workOrder.index)" ng-swipe-left="testSwift(workOrder.index)" ng-class="{active: workOrder.index == selectedIndex}" -->
-                        {{workOrder.index}}
-                        {{workOrder.name}}
+                    <a href="#" class="list-group-item" ng-repeat="workOrder in workOrders | orderBy : 'index'" ng-click="selectWorkOrder($event, workOrder.index)" ng-swipe-right="setWorkOrderDone(workOrder.index)" ng-swipe-left="setWorkOrderFail(workOrder.index)" ng-class="{active: workOrder.index == selectedIndex}" >
+                        <span ng-style="workOrder.index == selectedIndex && {'background-image': 'url(img/red_arrow_left.gif)'}" class="animatedArrowsContainer" style="float:left;">&nbsp;</span>
+                        <span ng-style="workOrder.index == selectedIndex && {'background-image': 'url(img/green_arrow_right.gif)'}" class="animatedArrowsContainer" style="float:right;">&nbsp;</span>
+                        <span class="workOrderElement">
+                            {{workOrder.index}}
+                            {{workOrder.name}}
+                        </span>
                     </a>
                 </div>
             </div>

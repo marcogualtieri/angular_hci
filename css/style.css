@@ -32,3 +32,15 @@ body {
     padding-bottom: 50px;
     overflow-y: auto;
 }
+.list-group-item.active {
+    background: #eee !important;
+    color: inherit !important;
+}
+.animatedArrowsContainer {
+    display: block;
+    width: 40px;
+    background-size: 20px 20px;
+}
+.workOrderElement {
+    padding: 0 20px;
+}

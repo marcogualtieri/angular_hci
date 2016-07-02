@@ -168,8 +168,17 @@ app.controller('appController', function ($scope) {
     };
 
     // change status
-    $scope.testSwift = function (sequence) {
-        alert(sequence);
+
+    $scope.setWorkOrderDone = function (index) {
+        if($scope.selectedIndex == index) { // to prevent accidental swipe on not selected rows
+            alert("WorkOrder " + index + " set as Done!");
+        }
+    };
+
+    $scope.setWorkOrderFail = function (index) {
+        if($scope.selectedIndex == index) { // to prevent accidental swipe on not selected rows
+            alert("WorkOrder " + index + " set as Fail!");
+        }
     };
 
 });
