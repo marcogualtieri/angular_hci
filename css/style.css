@@ -4,7 +4,7 @@ html {
 body {
     height: 100%;
     overflow: hidden;
-    background: #99CCFF;
+    background: #eee;
 }
 #map {
     height: 60%;
@@ -27,13 +27,36 @@ body {
     background: white;
     height: 40%;
 }
+#panelHeader {
+    height: 46px;
+    background: #eee;
+    text-align: center;
+    border-top: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+}
+#progressBar {
+    margin: 4px 75px;
+    height: 12px;
+}
+#panelHeader > .checkbox {
+    margin: 0;
+}
 #workOrdersContainer {
     height: 100%; 
     padding-bottom: 50px;
     overflow-y: auto;
 }
+.list-group-item {
+  transition: all linear 0.5s;
+  opacity: 1;
+  line-height: auto;
+}
+.list-group-item.ng-hide {
+    opacity: 0;
+    line-height: 0;
+}
 .list-group-item.active {
-    background: #eee !important;
+    background: #f8f8f8 !important;
     color: inherit !important;
 }
 .animatedArrowsContainer {

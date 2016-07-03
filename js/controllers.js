@@ -1,5 +1,5 @@
 
-var app = angular.module('app', ['ui.bootstrap', 'ngTouch']);
+var app = angular.module('app', ['ui.bootstrap', 'ngTouch', 'ngAnimate']);
 
 app.controller('orientationModalController', function ($scope, $rootScope, $uibModalInstance) {
     $scope.dismiss = function() {
@@ -169,6 +169,20 @@ app.controller('appController', function ($scope) {
 
     // change status
 
+    function updateProgressBar() {
+        var workOrdersCount = $scope.workOrders.length;
+        var workOrdersTodoCount = $scope.workOrders.filter(function (w) { return w.status == $scope.workOrderStatuses.TODO }).length;
+        var workOrdersDoneCount = $scope.workOrders.filter(function (w) { return w.status == $scope.workOrderStatuses.DONE }).length;
+        var workOrdersFailCount = $scope.workOrders.filter(function (w) { return w.status == $scope.workOrderStatuses.FAIL }).length;
+        $scope.progressBarPercentages = {
+            todo: workOrdersTodoCount / workOrdersCount * 100.0,
+            done: workOrdersDoneCount / workOrdersCount * 100.0,
+            fail: workOrdersFailCount / workOrdersCount * 100.0
+        };
+    }
+
+    updateProgressBar();
+
     $scope.setWorkOrderStatus = function (workOrder, statusLabel) {
         if($scope.selectedIndex == workOrder.index) { // to prevent accidental swipe on not selected rows
             if (workOrder.status == $scope.workOrderStatuses.TODO) {
@@ -186,6 +200,7 @@ app.controller('appController', function ($scope) {
                         origin: new google.maps.Point(0, -5)
                     });
                 }
+                updateProgressBar();
             }
         }
     };
