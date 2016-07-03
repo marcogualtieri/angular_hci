@@ -41,9 +41,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-danger" style="width:{{progressBarPercentages.fail}}%;"></div>
                     </div>
                     <div class="checkbox-inline">
-                        <label>
-                            <input type="checkbox" ng-model="hideClosedWorkOrders" ng-init="hideClosedWorkOrders=false"> Hide Closed WorkOrders
-                        </label>
+                        <label style="display:block;"><input type="checkbox" ng-model="hideClosedWorkOrders" ng-init="hideClosedWorkOrders=false">Hide Closed WorkOrders</label>
                     </div>
                 </div>
 
@@ -57,6 +55,41 @@
                         </span>
                     </a>
                 </div>
+
+                <div style="display:none;">
+                    <script type="text/ng-template" id="failWorkOrderModal.html">
+                        <div class="modal-body">
+                            <span>What's the issue with WorkOrder <br><b>{{workOrder.name}}</b> ?</span>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="failWorkOrderRadio" checked>
+                                    The address is wrong
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="failWorkOrderRadio">
+                                    The customer is closed
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="failWorkOrderRadio">
+                                    The customer refuses the service
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="failWorkOrderRadio">
+                                    I don't have the right equipment for this
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="setWorkOrderStatusFail(workOrder)">Ok</button>
+                        </div>
+                    </script>
+                </div>
             </div>
 
         </div>
@@ -67,7 +100,7 @@
                     We recommend to use your device in portrait mode for a better user experience.
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="dismiss()">OK</button>
+                    <button class="btn btn-primary" type="button" ng-click="dismiss()">Ok</button>
                 </div>
             </script>
         </div>

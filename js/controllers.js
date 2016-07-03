@@ -32,7 +32,7 @@ app.controller('orientationController', function ($scope, $rootScope, $window, $
 
 });
 
-app.controller('appController', function ($scope) {
+app.controller('appController', function ($scope, $uibModal) {
 
     // map 
 
@@ -199,10 +199,32 @@ app.controller('appController', function ($scope) {
                         url: 'img/marker_red.png',
                         origin: new google.maps.Point(0, -5)
                     });
+                    $scope.failWorkOrderModal = $uibModal.open({
+                        animation: true,
+                        size: 'sm',
+                        controller: 'setWorkOrderStatusFailController',
+                        templateUrl: 'failWorkOrderModal.html',
+                        backdrop: 'static', 
+                        keyboard: false,
+                        resolve: {
+                            workOrder: workOrder
+                        }
+                    });
                 }
                 updateProgressBar();
             }
         }
     };
 
+    
+
+});
+
+app.controller('setWorkOrderStatusFailController', function ($scope, $uibModalInstance, workOrder) {
+    
+    $scope.workOrder = workOrder;
+
+    $scope.setWorkOrderStatusFail = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
