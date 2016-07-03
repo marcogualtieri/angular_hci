@@ -39,7 +39,7 @@
                         <span ng-style="workOrder.index == selectedIndex && workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/red_arrow_left.gif)'}" class="animatedArrowsContainer" style="float:left;">&nbsp;</span>
                         <span ng-style="workOrder.index == selectedIndex && workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/green_arrow_right.gif)'}" class="animatedArrowsContainer" style="float:right;">&nbsp;</span>
                         <span class="workOrderElement">
-                            {{workOrder.index}}
+                            <span class="workOrderIndex" ng-class="workOrder.status == workOrderStatuses.TODO && 'backgroundBlue' || workOrder.status == workOrderStatuses.DONE && 'backgroundGreen' || workOrder.status == workOrderStatuses.FAIL && 'backgroundRed'">{{workOrder.index}}</span>
                             {{workOrder.name}}
                         </span>
                     </a>

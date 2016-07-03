@@ -67,7 +67,7 @@ app.controller('appController', function ($scope) {
             var marker = new google.maps.Marker({
                 map: $scope.map,
                 icon: {
-                    url: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+                    url: 'img/marker_blue.png',
                     origin: new google.maps.Point(0, -5)
                 },
                 position: new google.maps.LatLng(workOrder.lat, workOrder.lng),
@@ -174,9 +174,17 @@ app.controller('appController', function ($scope) {
             if (workOrder.status == $scope.workOrderStatuses.TODO) {
                 if(statusLabel == 'done') {
                     workOrder.setDone();
+                    workOrder.marker.setIcon({
+                        url: 'img/marker_green.png',
+                        origin: new google.maps.Point(0, -5)
+                    });
                 }
                 else if(statusLabel == 'fail') {
                     workOrder.setFail();
+                    workOrder.marker.setIcon({
+                        url: 'img/marker_red.png',
+                        origin: new google.maps.Point(0, -5)
+                    });
                 }
             }
         }
