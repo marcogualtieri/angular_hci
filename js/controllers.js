@@ -71,12 +71,16 @@ app.controller('appController', function ($scope, $uibModal) {
                     origin: new google.maps.Point(0, -5)
                 },
                 position: new google.maps.LatLng(workOrder.lat, workOrder.lng),
-                title: workOrder.name,
                 label: workOrder.index.toString(),
                 index: workOrder.index
             });
-            marker.content = marker.title + '<br>' + '<a href="geo:' + workOrder.lat + ',' + workOrder.lng + '" target="_blank">Direction</a>' 
-                + ' <a href="tel:+12345678">Phone</a>';    
+            marker.content = '<b>' + workOrder.name + '</b>'
+                + '<br>' + workOrder.description + ' - ' + workOrder.service + ' mins'
+                + '<br><hr style="margin: 4px 0;">'
+                + '<div style="text-align:center;">'
+                + '<a href="geo:' + workOrder.lat + ',' + workOrder.lng + '" target="_blank"><img src="img/directions.png"></a>' 
+                + '<span style="display:inline-block;width:20px;"></span>'
+                + '<a href="tel:' + workOrder.phone + '"><img src="img/phone.png"></a></div>';    
             workOrders[i].marker = marker;
             setEventForMarkerClick(workOrders[i].marker);
         }
