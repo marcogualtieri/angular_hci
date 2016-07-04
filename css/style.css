@@ -23,6 +23,16 @@ body {
 #centerMapBtn {
     top: 110px !important;
 }
+.layerMapBtn {
+    padding: 4px 8px;
+    top: 9px !important;
+}
+#trafficLayerMapBtn {
+    right: 9px !important;
+}
+#bikeLayerMapBtn {
+    right: 75px !important;
+}
 #panel {
     background: white;
     height: 40%;

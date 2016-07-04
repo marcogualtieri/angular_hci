@@ -153,21 +153,28 @@ app.controller('appController', function ($scope, $uibModal) {
     var trafficLayer = new google.maps.TrafficLayer();
     var bikeLayer = new google.maps.BicyclingLayer();
 
+    $scope.trafficLayerVisible = false;
+    $scope.bikeLayerVisible = false;
+
     $scope.toggleTrafficLayerMap = function() {
         if (trafficLayer.getMap()) {
             trafficLayer.setMap(null);
+            $scope.trafficLayerVisible = false;
         } 
         else {
             trafficLayer.setMap($scope.map);
+            $scope.trafficLayerVisible = true;
         }
     };
 
     $scope.toggleBikeLayerMap = function() {
         if (bikeLayer.getMap()) {
             bikeLayer.setMap(null);
+            $scope.bikeLayerVisible = false;
         } 
         else {
             bikeLayer.setMap($scope.map);
+            $scope.bikeLayerVisible = true;
         }
     };
 

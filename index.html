@@ -22,11 +22,11 @@
                 <button type="button" id="centerMapBtn" class="btn btn-default zoomMapBtn" ng-click="callCenterMap()">
                     <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
                 </button>
-                <button type="button" id="trafficLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleTrafficLayerMap()">
-                    <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                <button type="button" id="trafficLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleTrafficLayerMap()" ng-class="{active: trafficLayerVisible}">
+                    Traffic
                 </button>
-                <button type="button" id="bikeLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleBikeLayerMap()">
-                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                <button type="button" id="bikeLayerMapBtn" class="btn btn-default layerMapBtn" ng-click="toggleBikeLayerMap()" ng-class="{active: bikeLayerVisible}">
+                    Bike
                 </button>
             </div>
 
