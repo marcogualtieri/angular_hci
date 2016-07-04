@@ -51,7 +51,7 @@ app.controller('appController', function ($scope, $uibModal) {
 
     // map info window
 
-    var infoWindow = new google.maps.InfoWindow();
+    var infoWindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, 4)});
 
     var setEventForMarkerClick = function (marker) {
         google.maps.event.addListener(marker, 'click', function (evt) {
@@ -76,7 +76,7 @@ app.controller('appController', function ($scope, $uibModal) {
             });
             marker.content = '<b>' + workOrder.name + '</b>'
                 + '<br>' + workOrder.description + ' - ' + workOrder.service + ' mins'
-                + '<br><hr style="margin: 4px 0;">'
+                + '<br><hr style="margin: 3px 0;">'
                 + '<div style="text-align:center;">'
                 + '<a href="geo:' + workOrder.lat + ',' + workOrder.lng + '" target="_blank"><img src="img/directions.png"></a>' 
                 + '<span style="display:inline-block;width:20px;"></span>'
