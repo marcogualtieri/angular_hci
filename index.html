@@ -47,8 +47,8 @@
 
                 <div id="workOrdersContainer" class="list-group">
                     <a href="#" class="list-group-item" ng-repeat="workOrder in workOrders | orderBy : 'index'" ng-click="selectWorkOrder($event, workOrder.index)" ng-swipe-right="setWorkOrderStatus(workOrder, 'done')" ng-swipe-left="setWorkOrderStatus(workOrder, 'fail')" ng-class="{active: workOrder.index == selectedIndex}" ng-hide="hideClosedWorkOrders && workOrder.status != workOrderStatuses.TODO">
-                        <span ng-style="workOrder.index == selectedIndex && workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/red_arrow_left.gif)'}" class="animatedArrowsContainer" style="float:left;">&nbsp;</span>
-                        <span ng-style="workOrder.index == selectedIndex && workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/green_arrow_right.gif)'}" class="animatedArrowsContainer" style="float:right;">&nbsp;</span>
+                        <span ng-style="workOrder.index == selectedIndex && ((workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/red_arrow_left.gif)'}) || {'background-image': 'url(img/blue_undo_right.png)'})" class="animatedArrowsContainer" style="float:left;">&nbsp;</span>
+                        <span ng-style="workOrder.index == selectedIndex && ((workOrder.status == workOrderStatuses.TODO && {'background-image': 'url(img/green_arrow_right.gif)'}) || {'background-image': 'url(img/blue_undo_left.png)'})" class="animatedArrowsContainer" style="float:right;">&nbsp;</span>
                         <span class="workOrderElement">
                             <span class="workOrderIndex" ng-class="workOrder.status == workOrderStatuses.TODO && 'backgroundBlue' || workOrder.status == workOrderStatuses.DONE && 'backgroundGreen' || workOrder.status == workOrderStatuses.FAIL && 'backgroundRed'">{{workOrder.index}}</span>
                             {{workOrder.name}}

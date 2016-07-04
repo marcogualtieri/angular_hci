@@ -211,8 +211,15 @@ app.controller('appController', function ($scope, $uibModal) {
                         }
                     });
                 }
-                updateProgressBar();
             }
+            else {
+                workOrder.setTodo();
+                workOrder.marker.setIcon({
+                    url: 'img/marker_blue.png',
+                    origin: new google.maps.Point(0, -5)
+                });
+            }
+            updateProgressBar();
         }
     };
 
